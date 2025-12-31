@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration - Excel 5.0</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        .form-container {
+            max-width: 900px;
+            margin: 3rem auto;
+            padding: 2.5rem;
+            background-color: #1A1A1A;
+            border: 2px solid #DC143C;
+            border-radius: 12px;
+            animation: slideInBottom 0.6s ease-out;
+            box-shadow: 0 0 20px rgba(220, 20, 60, 0.15);
+        }
+
+        .section-header {
+            color: #ffffff;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #333;
+            text-shadow: 0 0 5px rgba(220, 20, 60, 0.4);
+            font-family: 'ITC Benguiat', serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-header::before {
+            content: '►';
+            margin-right: 10px;
+            font-size: 0.8em;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: #ffffff;
+            margin-bottom: 0.6rem;
+            font-weight: bold;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #FFFFFF;
+            border: 2px solid #444;
+            border-radius: 6px;
+            font-family: 'Courier New', Courier, monospace;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #DC143C;
+            box-shadow: 0 0 15px rgba(220, 20, 60, 0.4);
+            background-color: #000000;
+        }
+
+        .event-section-card {
+            background-color: #0d0d0d;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .event-section-card:hover {
+            border-color: #555;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .event-title {
+            color: #ffffff;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .event-subtitle {
+            font-size: 1.1rem;
+            color: #DC143C;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin: 2rem 0;
+            padding: 1rem;
+            background: rgba(220, 20, 60, 0.05);
+            border-radius: 6px;
+            border: 1px solid rgba(220, 20, 60, 0.2);
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #DC143C;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            color: #ffffff;
+            margin-bottom: 0;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .form-btn {
+            width: 100%;
+            padding: 18px;
+            background-color: #DC143C;
+            color: #000000;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 1rem;
+        }
+
+        .form-btn:hover {
+            background-color: #ff0000;
+            box-shadow: 0 0 30px rgba(220, 20, 60, 0.8);
+            transform: translateY(-2px);
+        }
+
+        /* Divider */
+        hr {
+            border: 0;
+            height: 1px;
+            background: #333;
+            margin: 2rem 0;
+        }
+    </style>
+
+    <!-- Firebase SDK (Compat) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+    <!-- Configuration -->
+    <!-- Ideally we point to the backend/firebase-config.js. 
+         Since register.html is in /frontend/, we go up one level. -->
+    <script src="js/firebase-config.js"></script>
+
+    <style>
+        @media (max-width: 600px) {
+            .event-title {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #FFFFFF;
+            border: 2px solid #444;
+            border-radius: 6px;
+            font-family: 'Courier New', Courier, monospace;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            font-weight: bold;
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #DC143C;
+            box-shadow: 0 0 15px rgba(220, 20, 60, 0.4);
+            background-color: #000000;
+        }
+
+        .success-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .success-content {
+            background: #000;
+            border: 2px solid #DC143C;
+            padding: 3rem;
+            text-align: center;
+            border-radius: 12px;
+            animation: zoomIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 50px rgba(220, 20, 60, 0.5);
+            max-width: 90%;
+        }
+
+        .success-text {
+            font-family: 'ITC Benguiat', serif;
+            font-size: 2.5rem;
+            color: transparent;
+            -webkit-text-stroke: 1px #DC143C;
+            text-shadow: 0 0 10px rgba(220, 20, 60, 0.8);
+            margin-bottom: 2rem;
+            line-height: 1.4;
+            animation: pulseGlow 2s infinite;
+        }
+
+        .success-close-btn {
+            background: #DC143C;
+            color: #fff;
+            border: none;
+            padding: 1rem 2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .success-close-btn:hover {
+            background: #ff0000;
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(220, 20, 60, 0.8);
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                text-shadow: 0 0 10px rgba(220, 20, 60, 0.8);
+            }
+
+            50% {
+                text-shadow: 0 0 30px rgba(220, 20, 60, 1);
+                filter: brightness(1.2);
+            }
+
+            100% {
+                text-shadow: 0 0 10px rgba(220, 20, 60, 0.8);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION BAR -->
+    <nav>
+        <div class="logo">
+            <img src="images/navbar-logo.png" alt="Excel 5.0">
+        </div>
+
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="brochure.html" class="nav-btn">Brochure</a></li>
+            <li><a href="register.html" class="nav-btn">Register</a></li>
+        </ul>
+
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- PAGE CONTENT -->
+    <!-- Custom Success Modal -->
+    <div id="successModal" class="success-modal">
+        <div class="success-content">
+            <h2 class="success-text">SUCCESSFULLY REGISTERED FOR<br>EXCEL 5.0</h2>
+            <button class="success-close-btn" onclick="closeModalAndRedirect()">Continue</button>
+        </div>
+    </div>
+
+    <div class="page-content" style="margin-top: 5rem;">
+        <h1 class="section-title"
+            style="font-family: 'Courier New', Courier, monospace; font-size: 3.5rem; color: #ffffff; text-shadow: 0 0 10px rgba(220, 20, 60, 0.8); letter-spacing: 4px; font-style: italic; font-weight: bold; text-transform: uppercase;">
+            Team Registration</h1>
+
+        <p style="text-align: center; color: #CCCCCC; font-size: 1.1rem; margin-bottom: 2rem;">
+            EXCEL 5.0 - The Ultimate Tech Fest Experience
+        </p>
+
+        <!-- REGISTRATION FORM -->
+        <div class="form-container">
+            <!-- Instructions / Notes -->
+            <div
+                style="background: rgba(220, 20, 60, 0.1); border-left: 4px solid #DC143C; padding: 1rem; margin-bottom: 2rem; border-radius: 4px;">
+                <h3 style="color: #DC143C; margin-top: 0; font-family: 'ITC Benguiat', serif;">IMPORTANT NOTES:</h3>
+                <ul
+                    style="color: #ddd; font-family: 'Courier New', monospace; font-size: 0.9rem; line-height: 1.6; margin-bottom: 0; padding-left: 20px;">
+                    <li>If you are not registering for a specific event/participant slot, please enter
+                        <strong>-</strong> or leave it blank.
+                    </li>
+                    <li>Please ensure all Phone Numbers provided are valid and active (WhatsApp preferred).</li>
+                    <li><strong>The Team Leader must be one of the registered participants.</strong> They are included
+                        in the total count (Max 19).</li>
+                    <li>The Team Leader is responsible for coordinating the entire team.</li>
+                </ul>
+            </div>
+
+            <form id="excelRegistrationForm" onsubmit="handleRegistration(event)">
+
+                <!-- 1. COLLEGE / TEAM DETAILS -->
+                <div class="section-header">College / Team Details</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="collegeName">Enter your College Name *</label>
+                        <input type="text" id="collegeName" name="collegeName" required
+                            placeholder="Enter your College Name here">
+                    </div>
+                    <div class="form-group">
+                        <label for="totalParticipants">Total Number of Participants *</label>
+                        <input type="number" id="totalParticipants" name="totalParticipants" required min="1" max="19"
+                            placeholder="Total count (Incl. Team Leader, Max 19)">
+                    </div>
+                </div>
+
+                <hr>
+
+                <h2
+                    style="color: #DC143C; text-align: center; margin-bottom: 2rem; text-shadow: 0 0 10px rgba(220, 20, 60, 0.6); text-transform: uppercase; letter-spacing: 2px;">
+                    Event-wise Registration Details</h2>
+
+                <!-- 1. StrangeSyntax -->
+                <div class="event-section-card">
+                    <div class="event-title">
+                        1. StrangeSyntax (Coding)
+                        <span class="event-subtitle">Team Size: 2</span>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Participant 1 Name</label>
+                            <input type="text" name="ss_p1_name" placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Participant 1 Contact</label>
+                            <input type="tel" name="ss_p1_contact" placeholder="Phone Number">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Participant 2 Name</label>
+                            <input type="text" name="ss_p2_name" placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Participant 2 Contact</label>
+                            <input type="tel" name="ss_p2_contact" placeholder="Phone Number">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. DesignDock -->
+                <div class="event-section-card">
+                    <div class="event-title">
+                        2. DesignDock (Web Design)
+                        <span class="event-subtitle">Team Size: 2</span>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Participant 1 Name</label>
+                            <input type="text" name="dd_p1_name" placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Participant 1 Contact</label>
+                            <input type="tel" name="dd_p1_contact" placeholder="Phone Number">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Participant 2 Name</label>
+                            <input type="text" name="dd_p2_name" placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Participant 2 Contact</label>
+                            <input type="tel" name="dd_p2_contact" placeholder="Phone Number">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Stranger Bytes -->
+                <div class="event-section-card">
+                    <div class="event-title">
+                        3. Stranger Bytes (IT Quiz)
+                        <span class="event-subtitle">Team Size: 2</span>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Participant 1 Name</label>
+                            <input type="text" name="sb_p1_name" placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Participant 1 Contact</label>
+                            <input type="tel" name="sb_p1_contact" placeholder="Phone Number">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Participant 2 Name</label>
+                            <input type="text" name="sb_p2_name" placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Participant 2 Contact</label>
+                            <input type="tel" name="sb_p2_contact" placeholder="Phone Number">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. The Hawkins Lab -->
+                <div class="event-section-card">
+                    <div class="event-title">
+                        4. The Hawkins Lab (IT Manager)
+                        <span class="event-subtitle">Team Size: 1</span>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Participant Name</label>
+                            <input type="text" name="hl_p1_name" placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Contact Number</label>
+                            <input type="tel" name="hl_p1_contact" placeholder="Phone Number">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. The Hawkins Heist -->
+                <div class="event-section-card">
+                    <div class="event-title">
+                        5. The Hawkins Heist (Treasure Hunt)
+                        <span class="event-subtitle">Team Size: 2</span>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Participant 1 Name</label>
+                            <input type="text" name="th_p1_name" placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Participant 1 Contact</label>
+                            <input type="tel" name="th_p1_contact" placeholder="Phone Number">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Participant 2 Name</label>
+                            <input type="text" name="th_p2_name" placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Participant 2 Contact</label>
+                            <input type="tel" name="th_p2_contact" placeholder="Phone Number">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Upside Down -->
+                <div class="event-section-card">
+                    <div class="event-title">
+                        6. Upside Down (Gaming)
+                        <span class="event-subtitle">Team Size: 4</span>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Participant 1 Name</label>
+                            <input type="text" name="ud_p1_name" placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Participant 1 Contact</label>
+                            <input type="tel" name="ud_p1_contact" placeholder="Phone Number">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Participant 2 Name</label>
+                            <input type="text" name="ud_p2_name" placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Participant 2 Contact</label>
+                            <input type="tel" name="ud_p2_contact" placeholder="Phone Number">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Participant 3 Name</label>
+                            <input type="text" name="ud_p3_name" placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Participant 3 Contact</label>
+                            <input type="tel" name="ud_p3_contact" placeholder="Phone Number">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Participant 4 Name</label>
+                            <input type="text" name="ud_p4_name" placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Participant 4 Contact</label>
+                            <input type="tel" name="ud_p4_contact" placeholder="Phone Number">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Strange Rhythms -->
+                <div class="event-section-card">
+                    <div class="event-title">
+                        7. Strange Rhythms (Dance)
+                        <span class="event-subtitle">Team Size: 5 – 7</span>
+                    </div>
+                    <!-- P1 -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Participant 1 Name</label>
+                            <input type="text" name="sr_p1_name" placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Participant 1 Contact</label>
+                            <input type="tel" name="sr_p1_contact" placeholder="Phone Number">
+                        </div>
+                    </div>
+                    <!-- P2 -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Participant 2 Name</label>
+                            <input type="text" name="sr_p2_name" placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Participant 2 Contact</label>
+                            <input type="tel" name="sr_p2_contact" placeholder="Phone Number">
+                        </div>
+                    </div>
+                    <!-- P3 -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Participant 3 Name</label>
+                            <input type="text" name="sr_p3_name" placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Participant 3 Contact</label>
+                            <input type="tel" name="sr_p3_contact" placeholder="Phone Number">
+                        </div>
+                    </div>
+                    <!-- P4 -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Participant 4 Name</label>
+                            <input type="text" name="sr_p4_name" placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Participant 4 Contact</label>
+                            <input type="tel" name="sr_p4_contact" placeholder="Phone Number">
+                        </div>
+                    </div>
+                    <!-- P5 -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Participant 5 Name</label>
+                            <input type="text" name="sr_p5_name" placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Participant 5 Contact</label>
+                            <input type="tel" name="sr_p5_contact" placeholder="Phone Number">
+                        </div>
+                    </div>
+                    <!-- P6 -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Participant 6 Name (Optional)</label>
+                            <input type="text" name="sr_p6_name" placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Participant 6 Contact (Optional)</label>
+                            <input type="tel" name="sr_p6_contact" placeholder="Phone Number">
+                        </div>
+                    </div>
+                    <!-- P7 -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Participant 7 Name (Optional)</label>
+                            <input type="text" name="sr_p7_name" placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Participant 7 Contact (Optional)</label>
+                            <input type="tel" name="sr_p7_contact" placeholder="Phone Number">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 8. Rofi Reel -->
+                <div class="event-section-card">
+                    <div class="event-title">
+                        8. Rofi Reel (Documentary)
+                        <span class="event-subtitle">Team Size: 1</span>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Participant Name</label>
+                            <input type="text" name="rr_p1_name" placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Contact Number</label>
+                            <input type="tel" name="rr_p1_contact" placeholder="Phone Number">
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <!-- FINAL SUBMISSION -->
+                <div class="section-header">Final Submission Details</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="teamLeaderName">Team Leader Name *</label>
+                        <input type="text" id="teamLeaderName" name="teamLeaderName" required placeholder="Full Name">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="teamLeaderContact">Team Leader Contact Number *</label>
+                        <input type="tel" id="teamLeaderContact" name="teamLeaderContact" required
+                            placeholder="Primary Contact">
+                    </div>
+                    <div class="form-group">
+                        <label for="emailId">Email ID *</label>
+                        <input type="email" id="emailId" name="emailId" required placeholder="Official Email Address">
+                    </div>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="declaration" name="declaration" required>
+                    <label for="declaration">I confirm that all details provided are accurate and all participants meet
+                        the eligibility criteria for Excel 5.0.</label>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="form-btn">Submit Registration</button>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p><span class="contact-label">Email:</span> <a
+                        href="mailto:mcaexcel5.0@gmail.com">mcaexcel5.0@gmail.com</a></p>
+                <p><span class="contact-label">Contact:</span> <a href="tel:+919480046998">94800 46998</a> | <a
+                        href="tel:+916360913762">63609 13762</a></p>
+                <div style="display: flex; gap: 5px;">
+                    <span class="contact-label">Address:</span>
+                    <span>SRINIVAS INSTITUTE OF TECHNOLOGY,<br>A. SHAMA RAO FOUNDATION,<br>Valachil, Mangaluru -
+                        574143,<br>Karnataka</span>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <p><a href="index.html">Home</a></p>
+                <p><a href="about.html">About</a></p>
+                <p><a href="events.html">Events</a></p>
+                <p><a href="team.html">Team</a></p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Location</h4>
+                <div class="map-container">
+                    <iframe
+                        src="https://maps.google.com/maps?q=Srinivas+Institute+of+Technology+Valachil&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                        width="100%" height="200" style="border:0; border-radius: 8px;" allowfullscreen=""
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p><span class="developed-by">Developed by Excel Development Team</span></p>
+            <p>&copy; 2025 Excel 5.0. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="js/main.js"></script>
+    <script>
+        async function handleRegistration(e) {
+            e.preventDefault();
+
+            const submitBtn = document.querySelector('.form-btn');
+            const originalText = submitBtn.innerText;
+            submitBtn.innerText = "Submitting...";
+            submitBtn.disabled = true;
+
+            // Gather Data
+            const form = document.getElementById('excelRegistrationForm');
+            const formData = new FormData(form);
+
+            // Helper to get value
+            const get = (name) => formData.get(name);
+
+            // Construct JSON Object
+            const registrationData = {
+                collegeName: get('collegeName'),
+                totalParticipants: get('totalParticipants'),
+                teamLeaderName: get('teamLeaderName'),
+                teamLeaderContact: get('teamLeaderContact'),
+                emailId: get('emailId'),
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                events: {
+                    strangeSyntax: [
+                        { name: get('ss_p1_name'), contact: get('ss_p1_contact') },
+                        { name: get('ss_p2_name'), contact: get('ss_p2_contact') }
+                    ],
+                    designDock: [
+                        { name: get('dd_p1_name'), contact: get('dd_p1_contact') },
+                        { name: get('dd_p2_name'), contact: get('dd_p2_contact') }
+                    ],
+                    strangerBytes: [
+                        { name: get('sb_p1_name'), contact: get('sb_p1_contact') },
+                        { name: get('sb_p2_name'), contact: get('sb_p2_contact') }
+                    ],
+                    hawkinsLab: [
+                        { name: get('hl_p1_name'), contact: get('hl_p1_contact') }
+                    ],
+                    hawkinsHeist: [
+                        { name: get('th_p1_name'), contact: get('th_p1_contact') },
+                        { name: get('th_p2_name'), contact: get('th_p2_contact') }
+                    ],
+                    upsideDown: [
+                        { name: get('ud_p1_name'), contact: get('ud_p1_contact') },
+                        { name: get('ud_p2_name'), contact: get('ud_p2_contact') },
+                        { name: get('ud_p3_name'), contact: get('ud_p3_contact') },
+                        { name: get('ud_p4_name'), contact: get('ud_p4_contact') }
+                    ],
+                    strangeRhythms: [ // Dynamic 7 participants
+                        { name: get('sr_p1_name'), contact: get('sr_p1_contact') },
+                        { name: get('sr_p2_name'), contact: get('sr_p2_contact') },
+                        { name: get('sr_p3_name'), contact: get('sr_p3_contact') },
+                        { name: get('sr_p4_name'), contact: get('sr_p4_contact') },
+                        { name: get('sr_p5_name'), contact: get('sr_p5_contact') },
+                        { name: get('sr_p6_name'), contact: get('sr_p6_contact') }, // Optional
+                        { name: get('sr_p7_name'), contact: get('sr_p7_contact') }  // Optional
+                    ],
+                    rofiReel: [
+                        { name: get('rr_p1_name'), contact: get('rr_p1_contact') }
+                    ]
+                }
+            };
+
+            // Remove empty optional participants (Clean up)
+            // Example: Filter out empty names from arrays
+            for (const key in registrationData.events) {
+                registrationData.events[key] = registrationData.events[key].filter(p => p.name && p.name.trim() !== "");
+            }
+
+            try {
+                // Send to Firebase
+                await db.collection("registrations").add(registrationData);
+
+                // Show Custom Modal
+                document.getElementById('successModal').style.display = 'flex';
+                form.reset();
+                // Redirect happens when user clicks the "Continue" button
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                alert("❌ Error submitting form: " + error.message);
+            } finally {
+                submitBtn.innerText = originalText;
+                submitBtn.disabled = false;
+            }
+        }
+
+        function closeModalAndRedirect() {
+            window.location.href = "index.html";
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events - Excel 5.0</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+
+<body>
+
+    <!-- NAVIGATION BAR -->
+    <nav>
+        <div class="logo">
+            <img src="images/navbar-logo.png" alt="Excel 5.0">
+        </div>
+
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="brochure.html" class="nav-btn">Brochure</a></li>
+            <li><a href="register.html" class="nav-btn">Register</a></li>
+        </ul>
+
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- PAGE CONTENT -->
+    <div class="page-content" style="margin-top: 5rem;">
+        <h1 class="section-title">
+            Our Events</h1>
+
+        <!-- Event Count -->
+        <div style="text-align: center; margin-bottom: 3rem; animation: fadeInUp 0.8s ease-out;">
+            <p style="font-size: 2rem; color: #CCCCCC; margin-bottom: 0.5rem; font-weight: 900; letter-spacing: 2px;">
+                TOTAL EVENTS</p>
+            <p style="font-size: 5rem; color: #DC143C; font-weight: 900; text-shadow: 0 0 30px rgba(220, 20, 60, 0.9);">
+                8</p>
+        </div>
+
+        <!-- Filter Section -->
+        <div
+            style="display: flex; gap: 1rem; justify-content: center; margin-bottom: 3rem; flex-wrap: wrap; animation: fadeInUp 0.8s ease-out 0.1s backwards;">
+            <button class="filter-btn active" onclick="filterEvents('all', this)">All Events</button>
+            <button class="filter-btn" onclick="filterEvents('technical', this)">Technical</button>
+            <button class="filter-btn" onclick="filterEvents('non-technical', this)">Non-Technical</button>
+        </div>
+
+        <!-- Events Grid -->
+        <!-- Events Grid -->
+        <div class="events-grid">
+            <!-- Event 1: Strange Syntax -->
+            <div class="event-card" onclick="openModal('strangesyntax')" data-category="technical">
+
+                <div class="event-card-info">
+                    <h3>Strange Syntax (Coding)</h3>
+                    <p class="event-tagline">Code Beyond Logic</p>
+                    <p class="event-description-short">A competitive coding event focused on logical thinking,
+                        algorithmic efficiency, and core computer science concepts through time-bound rounds.</p>
+                    <button class="event-card-btn">Register Now</button>
+                </div>
+
+            </div>
+
+            <!-- Event 2: Design Dock -->
+            <div class="event-card" onclick="openModal('designdock')" data-category="technical">
+
+                <div class="event-card-info">
+                    <h3>Design Dock (Web Design)</h3>
+                    <p class="event-tagline">Creative Meets Code</p>
+                    <p class="event-description-short">A web design challenge where teams create innovative solutions
+                        based on a given theme using core web technologies.</p>
+                    <button class="event-card-btn">Register Now</button>
+                </div>
+
+            </div>
+
+            <!-- Event 3: Stranger Bytes -->
+            <div class="event-card" onclick="openModal('strangerbytes')" data-category="technical">
+
+                <div class="event-card-info">
+                    <h3>Stranger Bytes (IT Quiz)</h3>
+                    <p class="event-tagline">Decode Before the Demogorgon</p>
+                    <p class="event-description-short">A fast-paced technical quiz testing knowledge, accuracy, and
+                        quick decision-making across multiple challenging rounds.</p>
+                    <button class="event-card-btn">Register Now</button>
+                </div>
+
+            </div>
+
+            <!-- Event 4: Hawkins Labs -->
+            <div class="event-card" onclick="openModal('hawkinslabs')" data-category="technical">
+
+                <div class="event-card-info">
+                    <h3>Hawkins Labs (IT Manager)</h3>
+                    <p class="event-tagline">Demogorgon-Proofing Your Network</p>
+                    <p class="event-description-short">A flagship individual event evaluating leadership, communication,
+                        decision-making, and real-world IT management skills.</p>
+                    <button class="event-card-btn">Register Now</button>
+                </div>
+
+            </div>
+
+            <!-- Event 5: Strange Rhythms -->
+            <div class="event-card" onclick="openModal('strangerhythms')" data-category="non-technical">
+
+                <div class="event-card-info">
+                    <h3>Strange Rhythms (Group Dance)</h3>
+                    <p class="event-tagline">Oddly Perfect, Perfectly Strange</p>
+                    <p class="event-description-short">A group dance event celebrating creativity, coordination, and
+                        expression across any dance form and theme.</p>
+                    <button class="event-card-btn">Register Now</button>
+                </div>
+
+            </div>
+
+            <!-- Event 6: Upside Down -->
+            <div class="event-card" onclick="openModal('upsidedown')" data-category="non-technical">
+
+                <div class="event-card-info">
+                    <h3>Upside Down (Gaming)</h3>
+                    <p class="event-tagline">The Game Isn’t Over Until the Gate Is Closed</p>
+                    <p class="event-description-short">A high-adrenaline BGMI tournament testing teamwork, strategy, and
+                        competitive gameplay in a mobile-only environment.</p>
+                    <button class="event-card-btn">Register Now</button>
+                </div>
+
+            </div>
+
+            <!-- Event 7: The Hawkins Heist -->
+            <div class="event-card" onclick="openModal('hawkinsheist')" data-category="non-technical">
+
+                <div class="event-card-info">
+                    <h3>The Hawkins Heist (Treasure Hunt)</h3>
+                    <p class="event-tagline">The Hunt Is Stranger Than You Think</p>
+                    <p class="event-description-short">A team-based hunt that evaluates logical reasoning, aptitude, and
+                        problem-solving skills across multiple stages.</p>
+                    <button class="event-card-btn">Register Now</button>
+                </div>
+
+            </div>
+
+            <!-- Event 8: ROFI Reel -->
+            <div class="event-card" onclick="openModal('rofireel')" data-category="non-technical">
+
+                <div class="event-card-info">
+                    <h3>ROFI Reel (Videography)</h3>
+                    <p class="event-tagline">Shoot the Strange</p>
+                    <p class="event-description-short">An individual videography event focused on storytelling,
+                        originality, and cinematic creativity inspired by mystery themes.</p>
+                    <button class="event-card-btn">Register Now</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Event Modal (Dynamic Content) -->
+    <div id="eventModal" class="event-modal-overlay" onclick="closeModalOutside(event)">
+        <div class="event-modal-content">
+            <button class="modal-close-btn" onclick="closeModal()">&times;</button>
+            <div id="modalContent">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- EVENT DATA SCRIPT -->
+    <script>
+        const eventsData = {
+            'strangesyntax': {
+                name: 'Strange Syntax (Coding)',
+                tagline: 'Code Beyond Logic',
+                description: 'A competitive coding event focused on logical thinking, algorithmic efficiency, and core computer science concepts through time-bound rounds.',
+                logo: 'images/events/StrangeSyntax(coding).png',
+                rules: [
+                    'Team size: Exactly 2 participants',
+                    'Proficiency in C, Java, or Python is required',
+                    'Strong foundation in DSA and core CS concepts',
+                    'Round-specific rules will be announced at the start'
+                ],
+                heads: [
+                    { name: 'Vishakh', contact: '8296398814', role: 'Event Head' },
+                    { name: 'Akshitha', contact: '8296015937', role: 'Co-Head' }
+                ]
+            },
+            'designdock': {
+                name: 'Design Dock (Web Design)',
+                tagline: 'Creative Meets Code',
+                description: 'A web design challenge where teams create innovative solutions based on a given theme using core web technologies.',
+                logo: 'images/events/DesignDock (web design).png',
+                rules: [
+                    'Team size: Exactly 2 participants',
+                    'Knowledge of HTML, CSS, and JavaScript is mandatory',
+                    'Personal electronic devices are not permitted',
+                    'Theme and task details will be announced on the spot'
+                ],
+                heads: [
+                    { name: 'S D Shravya', contact: '9739577414', role: 'Event Head' },
+                    { name: 'Mohan', contact: '8088450161', role: 'Co-Head' }
+                ]
+            },
+            'strangerbytes': {
+                name: 'Stranger Bytes (IT Quiz)',
+                tagline: 'Decode Before the Demogorgon',
+                description: 'A fast-paced technical quiz testing knowledge, accuracy, and quick decision-making across multiple challenging rounds.',
+                logo: 'images/events/Stranger_bytes(IT_QUIZ).png',
+                rules: [
+                    'Team size: Exactly 2 participants',
+                    'Includes Tech Trivia, Debug the Code, and Rapid-Fire rounds',
+                    'Mobile phones and external assistance are prohibited',
+                    'Negative marking may apply; decision is final'
+                ],
+                heads: [
+                    { name: 'Dimpal', contact: '9113801571', role: 'Event Head' },
+                    { name: 'Shradda', contact: '8123275654', role: 'Co-Head' }
+                ]
+            },
+            'hawkinslabs': {
+                name: 'Hawkins Labs (IT Manager)',
+                tagline: 'Demogorgon-Proofing Your Network',
+                description: 'A flagship individual event evaluating leadership, communication, decision-making, and real-world IT management skills.',
+                logo: 'images/events/The Hawkins Lab(IT manager).jpeg',
+                rules: [
+                    'Individual participation: 1 participant per college',
+                    'Participation in other events is not allowed',
+                    'Business formals are mandatory; late entry is disqualified',
+                    'Resume copies, laptop, and college ID are required'
+                ],
+                heads: [
+                    { name: 'Shvesh C Kottary', contact: '6363872154', role: 'Event Head' },
+                    { name: 'Dhanush', contact: '8075861718', role: 'Co-Head' }
+                ]
+            },
+            'strangerhythms': {
+                name: 'Strange Rhythms (Group Dance)',
+                tagline: 'Oddly Perfect, Perfectly Strange',
+                description: 'A group dance event celebrating creativity, coordination, and expression across any dance form and theme.',
+                logo: 'images/events/Strange_Rhythms(dance).JPG',
+                rules: [
+                    'Team size: Minimum 5, maximum 7 members',
+                    'Performance duration: 6 + 1 minutes',
+                    'Harmful props and fireworks are prohibited',
+                    'Vulgarity in costume or performance leads to disqualification'
+                ],
+                heads: [
+                    { name: 'Saniha', contact: '9611873675', role: 'Event Head' },
+                    { name: 'Likhitha', contact: '6360913762', role: 'Co-Head' }
+                ]
+            },
+            'upsidedown': {
+                name: 'Upside Down (Gaming – BGMI)',
+                tagline: 'The Game Isn’t Over Until the Gate Is Closed',
+                description: 'A high-adrenaline BGMI tournament testing teamwork, strategy, and competitive gameplay in a mobile-only environment.',
+                logo: 'images/events/Upside down(gaming).jpg',
+                rules: [
+                    'Team size: Exactly 4 players (BGMI level 30+)',
+                    'Only mobile devices allowed; no emulators or controllers',
+                    'Teams must assemble 30 minutes before the match',
+                    'No re-matches for disconnections'
+                ],
+                heads: [
+                    { name: 'Prajwal', contact: '9353589370', role: 'Event Head' },
+                    { name: 'Jayanth', contact: '9964560293', role: 'Co-Head' }
+                ]
+            },
+            'hawkinsheist': {
+                name: 'The Hawkins Heist (Treasure Hunt)',
+                tagline: 'The Hunt Is Stranger Than You Think',
+                description: 'A team-based hunt that evaluates logical reasoning, aptitude, and problem-solving skills across multiple stages.',
+                logo: 'images/events/The Hawkins Heist (Treasure Hunt).PNG',
+                rules: [
+                    'Team size: Exactly 2 participants from the same institution',
+                    'Mobile phones and internet usage are prohibited',
+                    'Instructions must be followed at all stages',
+                    'Judges’ decisions are final and binding'
+                ],
+                heads: [
+                    { name: 'Chinthan Rai Kukkuvalli', contact: '9740832951', role: 'Event Head' },
+                    { name: 'Raksha', contact: '7676146475', role: 'Co-Head' }
+                ]
+            },
+            'rofireel': {
+                name: 'ROFI Reel (Videography)',
+                tagline: 'Shoot the Strange',
+                description: 'An individual videography event focused on storytelling, originality, and cinematic creativity inspired by mystery themes.',
+                logo: 'images/events/Rofi Reel( Videography).png',
+                rules: [
+                    'Video duration: 2 minutes + 30 seconds for credits',
+                    'Landscape orientation only',
+                    'Individual participation only',
+                    'Plagiarism leads to immediate disqualification'
+                ],
+                heads: [
+                    { name: 'Priyanka S', contact: '9481983768', role: 'Event Head' },
+                    { name: 'Raksha', contact: '7204731478', role: 'Co-Head' }
+                ]
+            }
+        };
+
+        function openModal(eventId) {
+            const modal = document.getElementById('eventModal');
+            const content = document.getElementById('modalContent');
+            const event = eventsData[eventId];
+
+            if (!event) return;
+
+            let rulesHtml = '';
+            event.rules.forEach(rule => {
+                rulesHtml += `<li>${rule}</li>`;
+            });
+
+            let headsHtml = '';
+            event.heads.forEach(head => {
+                headsHtml += `
+                    <div class="contact-item">
+                        <strong>${head.role}</strong>
+                        <span>${head.name}</span><br>
+                        <a href="tel:${head.contact}" style="color: #ccc; text-decoration: none; font-size: 0.9rem;">${head.contact}</a>
+                    </div>
+                `;
+            });
+
+            content.innerHTML = `
+                <div class="modal-header">
+                    <img src="${event.logo}" alt="${event.name}" class="modal-logo">
+                    <div class="modal-title-group">
+                        <h2>${event.name}</h2>
+                        <p class="modal-tagline">"${event.tagline}"</p>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <p style="font-style: italic; color: #fff;">${event.description}</p>
+                    
+                    <h3>Rules & Regulations</h3>
+                    <ul>${rulesHtml}</ul>
+
+                    <h3>Event Coordinators</h3>
+                    <div class="modal-contact">
+                        ${headsHtml}
+                    </div>
+
+                    <div style="margin-top: 2rem; text-align: center;">
+                        <button onclick="window.location.href='register.html'" class="event-card-btn" style="padding: 12px 30px; font-size: 1.1rem;">Register Now</button>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('eventModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        }
+
+        function closeModalOutside(e) {
+            if (e.target.classList.contains('event-modal-overlay')) {
+                closeModal();
+            }
+        }
+    </script>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p><span class="contact-label">Email:</span> <a
+                        href="mailto:mcaexcel5.0@gmail.com">mcaexcel5.0@gmail.com</a></p>
+                <p><span class="contact-label">Contact:</span> <a href="tel:+919480046998">94800 46998</a> | <a
+                        href="tel:+916360913762">63609 13762</a></p>
+                <div style="display: flex; gap: 5px;">
+                    <span class="contact-label">Address:</span>
+                    <span>SRINIVAS INSTITUTE OF TECHNOLOGY,<br>A. SHAMA RAO FOUNDATION,<br>Valachil, Mangaluru -
+                        574143,<br>Karnataka</span>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <p><a href="index.html">Home</a></p>
+                <p><a href="about.html">About</a></p>
+                <p><a href="events.html">Events</a></p>
+                <p><a href="team.html">Team</a></p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Location</h4>
+                <div class="map-container">
+                    <iframe
+                        src="https://maps.google.com/maps?q=Srinivas+Institute+of+Technology+Valachil&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                        width="100%" height="200" style="border:0; border-radius: 8px;" allowfullscreen=""
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p><span class="developed-by">Developed by Excel Development Team</span></p>
+            <p>&copy; 2025 Excel 5.0. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPT FOR FILTERING -->
+    <script>
+        function filterEvents(category, btn) {
+            // Update active button state
+            if (btn) {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            }
+
+            const cards = document.querySelectorAll('.event-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeIn 0.6s ease-out';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
+    <!-- SCRIPTS -->
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>

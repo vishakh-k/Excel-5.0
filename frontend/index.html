@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel 5.0 - Events & Registration</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+
+<body>
+
+    <!-- VIDEO LOADER OVERLAY -->
+    <div id="video-loader">
+        <video autoplay muted playsinline>
+            <source src="images/loadingvideo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <button class="skip-btn">SKIP</button>
+    </div>
+
+    <!-- NAVIGATION BAR -->
+    <nav>
+        <div class="logo">
+            <img src="images/navbar-logo.png" alt="Excel 5.0">
+        </div>
+
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="brochure.html" class="nav-btn">Brochure</a></li>
+            <li><a href="register.html" class="nav-btn">Register</a></li>
+        </ul>
+
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-logo">
+            <img src="images/excel-logo.png" alt="Excel 5.0 Logo">
+            <span class="hero-logo-number">5</span>
+        </div>
+        <div class="hero-content">
+        </div>
+    </section>
+
+    <!-- EVENT DETAILS SECTION -->
+    <section class="event-details">
+        <div class="event-details-container">
+            <h2 class="tagline">INNOVATE. COMPETE. DOMINATE.</h2>
+            <p class="event-subtitle">
+                Step into a high-energy arena where innovation meets creativity and competition fuels excellence.
+                EXCEL&nbsp;5.0 brings together sharp minds, bold ideas, and cutting-edge technology under one platform.
+                From intense coding battles to creative design challenges and cultural showcases, every moment is
+                built to inspire, compete, and connect.
+            </p>
+            <p class="event-subtitle">
+                Mark your calendar for <strong>18 February 2026</strong> and be part of a national-level tech fest
+                where skills are tested, talent shines, and champions rise.
+            </p>
+        </div>
+    </section>
+
+    <!-- ACTION CARDS SECTION -->
+    <section class="action-cards">
+        <div class="cards-container">
+            <div class="action-card card-1 animate-left">
+                <h3>Explore Events</h3>
+                <p>Discover all the exciting events and competitions</p>
+                <a href="events.html" class="card-btn">Browse</a>
+            </div>
+
+            <div class="action-card card-2 animate-center">
+                <h3>Register Now</h3>
+                <p>Sign up your team for EXCEL 5.0</p>
+                <a href="register.html" class="card-btn">Join</a>
+            </div>
+
+            <div class="action-card card-3 animate-right">
+                <h3>Join Our Hackathon</h3>
+                <p>Compete in the ultimate coding challenge</p>
+                <a href="events.html#hackathon" class="card-btn">Compete</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQs SECTION -->
+    <section class="faqs">
+        <div class="faqs-container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+
+            <div class="faq-grid" style="grid-template-columns: 1fr;">
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <h4 class="faq-question">Who can participate in EXCEL 5.0?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <p class="faq-answer" style="display: none;">EXCEL 5.0 is open to all BCA and BSc (Computer Science)
+                        students.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <h4 class="faq-question">How many members should a team have?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <p class="faq-answer" style="display: none;">Each team must consist of 19 members.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <h4 class="faq-question">Can multiple teams from the same college participate?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <p class="faq-answer" style="display: none;">Yes, any number of teams from a single college can
+                        participate.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <h4 class="faq-question">Is participation in all events mandatory?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <p class="faq-answer" style="display: none;">Yes, participation in all events is mandatory to
+                        qualify for the overall championship.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <h4 class="faq-question">Will lunch be provided during the event?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <p class="faq-answer" style="display: none;">Yes, lunch will be provided to all registered
+                        participants on the event day.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <h4 class="faq-question">Are judges' decisions final?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <p class="faq-answer" style="display: none;">Yes, all decisions made by the judges are final and
+                        binding.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <h4 class="faq-question">Where can participants find detailed event information?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <p class="faq-answer" style="display: none;">Detailed information is available on the official EXCEL
+                        5.0 website.</p>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-header">
+                        <h4 class="faq-question">Whom should participants contact for event-specific rules?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <p class="faq-answer" style="display: none;">Participants should refer to the website for event
+                        rules and instructions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <!-- Contact Section -->
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p><span class="contact-label">Email:</span> <a
+                        href="mailto:mcaexcel5.0@gmail.com">mcaexcel5.0@gmail.com</a></p>
+                <p><span class="contact-label">Contact:</span> <a href="tel:+919480046998">94800 46998</a> | <a
+                        href="tel:+916360913762">63609 13762</a></p>
+                <div style="display: flex; gap: 5px;">
+                    <span class="contact-label">Address:</span>
+                    <span>SRINIVAS INSTITUTE OF TECHNOLOGY,<br>A. SHAMA RAO FOUNDATION,<br>Valachil, Mangaluru -
+                        574143,<br>Karnataka</span>
+                </div>
+            </div>
+
+            <!-- Links Section -->
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <p><a href="index.html">Home</a></p>
+                <p><a href="about.html">About</a></p>
+                <p><a href="events.html">Events</a></p>
+                <p><a href="team.html">Team</a></p>
+            </div>
+
+            <!-- Google Map Embed (Note: Replace with actual embed) -->
+            <div class="footer-section">
+                <h4>Location</h4>
+                <div class="map-container">
+                    <iframe
+                        src="https://maps.google.com/maps?q=Srinivas+Institute+of+Technology+Valachil&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                        width="100%" height="200" style="border:0; border-radius: 8px;" allowfullscreen=""
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p><span class="developed-by">Developed by Excel Development Team</span></p>
+            <p>&copy; 2025 Excel 5.0. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="js/video-loader.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+        // FAQ Toggle Functionality
+        document.querySelectorAll('.faq-header').forEach(header => {
+            header.addEventListener('click', function () {
+                const answer = this.nextElementSibling;
+                const toggle = this.querySelector('.faq-toggle');
+
+                if (answer.style.display === 'none') {
+                    answer.style.display = 'block';
+                    toggle.textContent = '−';
+                } else {
+                    answer.style.display = 'none';
+                    toggle.textContent = '+';
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

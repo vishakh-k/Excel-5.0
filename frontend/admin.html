@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel 5.0 - Admin Dashboard</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #fff;
+            padding: 2rem;
+        }
+
+        h1 {
+            color: #dc143c;
+            text-align: center;
+        }
+
+        .controls {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        button {
+            padding: 1rem 2rem;
+            background: #dc143c;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #ff0000;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th,
+        td {
+            border: 1px solid #444;
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        th {
+            color: #dc143c;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+    <!-- Firebase SDK (Compat) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+    <!-- SheetJS for Excel Export -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+
+    <!-- Config -->
+    <script src="js/firebase-config.js"></script>
+</head>
+
+<body>
+    <h1>Excel 5.0 Admin Dashboard</h1>
+
+    <div class="controls">
+        <p id="status" style="margin-top: 1rem; color: #ccc;">Loading data...</p>
+    </div>
+
+    <table id="regTable">
+        <thead>
+            <tr>
+                <th>College</th>
+                <th>Leader</th>
+                <th>Event Participants (Name - Contact)</th>
+                <th>Total Participants</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data will load here -->
+        </tbody>
+    </table>
+
+    <script>
+        let allRegistrations = [];
+
+        // Define event mapping and ORDER for display (Global Scope)
+        const eventOrder = [
+            'strangeSyntax', // Coding
+            'designDock',    // Web Design
+            'strangerBytes', // IT Quiz
+            'hawkinsLab',    // IT Manager
+            'hawkinsHeist',  // Treasure Hunt
+            'upsideDown',    // Gaming
+            'strangeRhythms',// Dance
+            'rofiReel'       // Videography
+        ];
+
+        const eventLabels = {
+            strangeSyntax: "Strange Syntax (Coding)",
+            designDock: "Design Dock (Web Design)",
+            strangerBytes: "Stranger Bytes (IT Quiz)",
+            hawkinsLab: "Hawkins Lab (IT Manager)",
+            hawkinsHeist: "Hawkins Heist (Treasure Hunt)",
+            upsideDown: "Upside Down (Gaming)",
+            strangeRhythms: "Strange Rhythms (Dance)",
+            rofiReel: "Rofi Reel (Videography)"
+        };
+
+        async function loadData() {
+            const tableBody = document.querySelector('#regTable tbody');
+            const status = document.getElementById('status');
+
+            try {
+                const snapshot = await db.collection('registrations').orderBy('timestamp', 'asc').get();
+                status.innerText = `Found ${snapshot.size} registration(s).`;
+
+                tableBody.innerHTML = '';
+                allRegistrations = [];
+
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    allRegistrations.push(data);
+
+                    // Generate HTML for participants
+                    let participantsHtml = '<div style="font-size: 0.9em;">';
+                    if (data.events) {
+                        // Iterate based on the defined ORDER
+                        eventOrder.forEach(key => {
+                            const participants = data.events[key];
+                            if (participants && participants.length > 0) {
+                                // Filter out empty entries just in case
+                                const validParticipants = participants.filter(p => p.name);
+                                if (validParticipants.length > 0) {
+                                    participantsHtml += `<strong style="color: #ff6b6b; display:block; margin-top:5px;">${eventLabels[key] || key}:</strong>`;
+                                    participantsHtml += `<ul style="margin: 0; padding-left: 20px;">`;
+                                    validParticipants.forEach(p => {
+                                        participantsHtml += `<li>${p.name} (${p.contact})</li>`;
+                                    });
+                                    participantsHtml += `</ul>`;
+                                }
+                            }
+                        });
+                    }
+                    participantsHtml += '</div>';
+
+                    const row = `<tr>
+                        <td style="vertical-align: top;"><strong>${data.collegeName || 'N/A'}</strong></td>
+                        <td style="vertical-align: top;">
+                            ${data.teamLeaderName || 'N/A'}<br>
+                            <small>${data.teamLeaderContact || 'N/A'}</small><br>
+                            <small>${data.emailId || ''}</small>
+                        </td>
+                        <td style="vertical-align: top;">${participantsHtml}</td>
+                        <td style="vertical-align: top;">${data.totalParticipants || 'N/A'}</td>
+                    </tr>`;
+                    tableBody.innerHTML += row;
+                });
+            } catch (error) {
+                console.error(error);
+                status.innerText = "Error loading data. Check console (and ensure Firestore rules are open/test mode).";
+            }
+        }
+
+        function exportToExcel() {
+            if (allRegistrations.length === 0) {
+                alert("No data to export!");
+                return;
+            }
+
+            const wb = XLSX.utils.book_new();
+
+            // 1. Summary Sheet (Detailed Matrix)
+            const summaryData = allRegistrations.map(reg => {
+                const row = {
+                    "College": reg.collegeName,
+                    "Total Students": reg.totalParticipants,
+                    "Team Leader": reg.teamLeaderName,
+                    "Contact": reg.teamLeaderContact,
+                    "Email": reg.emailId
+                };
+
+                // Add counts per event to summary
+                if (reg.events) {
+                    for (const [key, label] of Object.entries(eventLabels)) {
+                        // Check if event exists and filter valid participants
+                        const count = reg.events[key] ? reg.events[key].filter(p => p.name).length : 0;
+                        row[label] = count > 0 ? count : 0;
+                    }
+                }
+                return row;
+            });
+            const wsSummary = XLSX.utils.json_to_sheet(summaryData);
+            // Auto-width for summary
+            wsSummary['!cols'] = [{ wch: 30 }, { wch: 10 }, { wch: 20 }, { wch: 15 }, { wch: 25 }];
+            XLSX.utils.book_append_sheet(wb, wsSummary, "MASTER SUMMARY");
+
+            // 2. Detailed Sheets for EACH Event (With Leader Info)
+            // Use the ordered list for sheet creation sequence
+            eventOrder.forEach(eventKey => {
+                const sheetLabel = eventLabels[eventKey].split(' (')[0]; // Short name for sheet
+                const eventParticipants = [];
+
+                allRegistrations.forEach(reg => {
+                    if (reg.events && reg.events[eventKey]) {
+                        reg.events[eventKey].forEach(participant => {
+                            if (participant.name) {
+                                eventParticipants.push({
+                                    "College": reg.collegeName,
+                                    "Participant Name": participant.name,
+                                    "Contact Number": participant.contact || 'N/A',
+                                    // Add Contextual Info
+                                    "Team Leader": reg.teamLeaderName,
+                                    "Leader Contact": reg.teamLeaderContact
+                                });
+                            }
+                        });
+                    }
+                });
+
+                if (eventParticipants.length > 0) {
+                    const ws = XLSX.utils.json_to_sheet(eventParticipants);
+                    // Adjust column widths: College, Name, Contact, Leader, L.Contact
+                    ws['!cols'] = [{ wch: 30 }, { wch: 25 }, { wch: 15 }, { wch: 20 }, { wch: 15 }];
+                    // Use a safe sheet name length (max 31 chars in Excel)
+                    const safeName = sheetLabel.substring(0, 30);
+                    XLSX.utils.book_append_sheet(wb, ws, safeName);
+                }
+            });
+
+            // 3. ALL PARTICIPANTS (Flat List)
+            const allStudents = [];
+            allRegistrations.forEach(reg => {
+                if (reg.events) {
+                    eventOrder.forEach(eventKey => {
+                        if (reg.events[eventKey]) {
+                            reg.events[eventKey].forEach(p => {
+                                if (p.name) {
+                                    allStudents.push({
+                                        "College": reg.collegeName,
+                                        "Participant Name": p.name,
+                                        "Contact Number": p.contact || 'N/A',
+                                        "Event": eventLabels[eventKey],
+                                        "Team Leader": reg.teamLeaderName
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+            const wsAll = XLSX.utils.json_to_sheet(allStudents);
+            wsAll['!cols'] = [{ wch: 30 }, { wch: 25 }, { wch: 15 }, { wch: 30 }, { wch: 20 }];
+            XLSX.utils.book_append_sheet(wb, wsAll, "ALL STUDENTS");
+
+            // Save file
+            XLSX.writeFile(wb, "Excel_5.0_Registrations_Full.xlsx");
+        }
+
+        // Load on start
+        loadData();
+    </script>
+</body>
+
+</html>

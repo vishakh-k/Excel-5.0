@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Test - Excel 5.0</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <style>
+        .responsive-info {
+            position: fixed;
+            top: 150px;
+            left: 20px;
+            background: rgba(220, 20, 60, 0.9);
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 12px;
+            z-index: 5000;
+            font-family: monospace;
+        }
+
+        .device-indicator {
+            position: fixed;
+            top: 200px;
+            left: 20px;
+            background: rgba(220, 20, 60, 0.9);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .test-content {
+            margin-top: 150px;
+            padding: 2rem;
+            background: #000;
+            min-height: 200vh;
+        }
+
+        .test-section {
+            background: #1a1a1a;
+            padding: 2rem;
+            margin: 1rem 0;
+            border-left: 3px solid #dc143c;
+            border-radius: 5px;
+        }
+
+        .test-section h2 {
+            color: #ff0000;
+            margin-bottom: 1rem;
+        }
+
+        .test-section p {
+            line-height: 1.8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION BAR -->
+    <nav>
+        <div class="logo">
+            <img src="images/excel-logo.png" alt="Excel 5.0">
+        </div>
+
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="team.html">Team</a></li>
+            <li><a href="events.html">Events</a></li>
+        </ul>
+
+        <div class="nav-buttons">
+            <a href="brochure.html" class="nav-btn">Rulebook</a>
+            <a href="register.html" class="nav-btn nav-btn-primary">Register</a>
+        </div>
+
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <div class="responsive-info">
+        <strong>Testing Mobile Responsiveness</strong><br>
+        Resize your browser to test:<br>
+        • Desktop: > 768px<br>
+        • Tablet: 481px - 768px<br>
+        • Mobile: ≤ 480px
+    </div>
+
+    <div class="device-indicator" id="deviceIndicator">
+        Desktop (> 768px)
+    </div>
+
+    <div class="test-content">
+        <div class="test-section">
+            <h2>📱 Responsive Navbar Test</h2>
+            <p>
+                This page helps you test the responsive navbar functionality. The navbar should:
+            </p>
+            <ul style="margin-left: 2rem; color: #ccc;">
+                <li>Show full navigation menu on desktop (> 768px)</li>
+                <li>Show hamburger menu on tablet (481px - 768px)</li>
+                <li>Show hamburger menu on mobile (≤ 480px)</li>
+                <li>Hamburger menu should toggle on click</li>
+                <li>Menu should close when you click a link</li>
+                <li>Menu should close when you click outside</li>
+            </ul>
+        </div>
+
+        <div class="test-section">
+            <h2>🎯 Current Viewport</h2>
+            <p>
+                <strong>Width:</strong> <span id="viewportWidth">1920</span>px<br>
+                <strong>Device Type:</strong> <span id="deviceType">Desktop</span><br>
+                <strong>Hamburger Visible:</strong> <span id="hamburgerVisible">No</span>
+            </p>
+        </div>
+
+        <div class="test-section">
+            <h2>✅ Testing Checklist</h2>
+            <p>
+                <strong>Desktop Mode:</strong><br>
+                ☐ Navigation items visible<br>
+                ☐ Register buttons visible<br>
+                ☐ Hamburger menu hidden<br><br>
+
+                <strong>Tablet Mode (resize to 600px):</strong><br>
+                ☐ Logo visible<br>
+                ☐ Navigation menu hidden<br>
+                ☐ Hamburger visible and clickable<br>
+                ☐ Click hamburger - menu should appear<br>
+                ☐ Navbar shows rounded corners<br><br>
+
+                <strong>Mobile Mode (resize to 400px):</strong><br>
+                ☐ Logo smaller but visible<br>
+                ☐ Hamburger smaller but clickable<br>
+                ☐ Menu appears below navbar<br>
+                ☐ Menu items readable and tappable<br>
+                ☐ Click link - menu closes automatically<br>
+            </p>
+        </div>
+
+        <div class="test-section">
+            <h2>🔧 Debug Info</h2>
+            <p>
+                Open browser DevTools (F12) and check:<br>
+                • Console for any JavaScript errors<br>
+                • Elements panel to inspect navbar structure<br>
+                • Styles to verify CSS is applied<br>
+                • Mobile device emulation (Ctrl+Shift+M in Chrome)
+            </p>
+        </div>
+
+        <div class="test-section">
+            <h2>📖 Lorem Ipsum</h2>
+            <p>
+                Scroll down to test if navbar stays fixed and menu works while scrolling.
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+        </div>
+
+        <div class="test-section">
+            <p>
+                Keep scrolling to test fixed navbar and hamburger menu interaction...
+            </p>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Responsive testing script
+        function updateResponsiveInfo() {
+            const width = window.innerWidth;
+            const indicator = document.getElementById('deviceIndicator');
+            const viewportWidth = document.getElementById('viewportWidth');
+            const deviceType = document.getElementById('deviceType');
+            const hamburgerVisible = document.getElementById('hamburgerVisible');
+            const hamburger = document.querySelector('.hamburger');
+
+            viewportWidth.textContent = width;
+
+            if (width > 768) {
+                indicator.textContent = 'Desktop (> 768px)';
+                deviceType.textContent = 'Desktop';
+                hamburgerVisible.textContent = 'No';
+            } else if (width > 480) {
+                indicator.textContent = 'Tablet (481px - 768px)';
+                deviceType.textContent = 'Tablet';
+                hamburgerVisible.textContent = 'Yes';
+            } else {
+                indicator.textContent = 'Mobile (≤ 480px)';
+                deviceType.textContent = 'Mobile';
+                hamburgerVisible.textContent = 'Yes';
+            }
+
+            // Check actual hamburger visibility
+            const isVisible = hamburger && window.getComputedStyle(hamburger).display !== 'none';
+            hamburgerVisible.textContent = isVisible ? 'Yes (Computed)' : 'No (Computed)';
+        }
+
+        window.addEventListener('load', updateResponsiveInfo);
+        window.addEventListener('resize', updateResponsiveInfo);
+    </script>
+
+</body>
+
+</html>
