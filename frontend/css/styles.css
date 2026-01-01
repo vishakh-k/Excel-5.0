@@ -328,7 +328,8 @@ nav {
   top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family: 'ITC Benguiat', serif;
+  font-family: 'ITC Benguiat';
+  font-weight: bold;
   font-size: 30rem;
   color: rgba(220, 20, 60, 0.05);
   /* Very faint red fill */
