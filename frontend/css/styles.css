@@ -1668,8 +1668,14 @@ footer {
   }
 
   .section-title {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
+    font-size: 2rem !important;
+    /* Force override for mobile */
+    line-height: 1.2;
+    margin-bottom: 2rem;
+    text-align: center;
+    /* Ensure long custom inline styles don't break layout */
+    white-space: normal;
+    word-wrap: break-word;
   }
 
   .faq-grid {
