@@ -2183,33 +2183,22 @@ footer {
 /* Social Media Icons in Footer*/
 .social-icons-row {
   display: flex;
-  gap: 15px;
-  margin-top: 10px;
+  gap: 20px;
+  margin-top: 15px;
+  justify-content: flex-start;
 }
 
-.social-icon {
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
-  transition: transform 0.3s ease;
-  filter: brightness(0.8) invert(1);
-  /* Invert to make black icons white if they are black-on-transparent */
-}
-
-/* Special handling if icons are already colored or white, but assuming standard icons might need adjustment */
-.social-icon:hover {
-  transform: scale(1.2);
-  filter: brightness(1) invert(0);
-  /* Reveal original colors on hover if desired, or keep white */
-}
-
-/* Adjusting specifically for the provided "icons8" which are likely colored. 
-   If they are colored, we might not want invert(1). 
-   Let's assume they are colored and just need brightness adjustment. 
-*/
 .social-icon {
   width: 35px;
   height: 35px;
-  filter: none;
-  /* Reset filter */
+  object-fit: contain;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  /* Bouncy transition */
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+}
+
+.social-icon:hover {
+  transform: scale(1.2) translateY(-3px);
+  filter: drop-shadow(0 0 8px rgba(220, 20, 60, 0.8)) brightness(1.2);
+  /* Red glow matching theme */
 }
