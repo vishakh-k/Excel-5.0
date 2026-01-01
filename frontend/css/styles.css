@@ -748,6 +748,10 @@ nav {
   padding: 6rem 2rem;
   background: #000000;
   min-height: auto;
+  border-bottom: 2px solid var(--primary-red);
+  position: relative;
+  /* Optional: Add a glow effect to the line */
+  box-shadow: 0 4px 20px -5px rgba(220, 20, 60, 0.5);
 }
 
 .cards-container {
@@ -767,6 +771,11 @@ nav {
   transition: all 0.3s ease;
   animation: slideInTop 0.8s ease-out;
   cursor: pointer;
+  /* Flexbox for equal button alignment */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
 }
 
 .action-card.card-1 {
@@ -821,6 +830,8 @@ nav {
   font-size: 1.1rem;
   transition: all 0.3s ease;
   border: 2px solid var(--primary-red);
+  margin-top: auto;
+  /* Pushes button to the bottom */
 }
 
 .card-btn:hover {
@@ -1654,6 +1665,29 @@ footer {
     padding: 0.8rem 1.5rem;
     font-size: 0.9rem;
     min-width: unset;
+  }
+
+  /* Fix for text spacing on mobile - left align instead of justify */
+  .about-red-box p {
+    text-align: left;
+    word-spacing: normal;
+  }
+
+  /* Fix for mission background image on mobile */
+  .vm-card {
+    background-attachment: scroll !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    min-height: 350px;
+  }
+}
+
+/* Also apply to slightly larger screens (Tablets/Landscape) where grid is 1 column */
+@media (max-width: 992px) {
+  .vm-card {
+    background-size: cover !important;
+    background-position: center !important;
   }
 }
 
