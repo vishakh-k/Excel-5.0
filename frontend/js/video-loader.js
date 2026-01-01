@@ -2,7 +2,7 @@
    VIDEO LOADER - Plays on page load
    ===================================================== */
 
-window.addEventListener("load", function () {
+window.addEventListener("DOMContentLoaded", function () {
   const videoLoader = document.getElementById("video-loader");
   const skipBtn = document.querySelector(".skip-btn");
 
