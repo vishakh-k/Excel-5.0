@@ -1628,114 +1628,128 @@ footer {
   .event-subtitle {
     font-size: 1rem;
     margin-top: 5px;
+  }
 
-    .form-group input,
-    .form-group select {
-      font-size: 0.9rem;
-      padding: 12px;
-    }
+  .form-group input,
+  .form-group select {
+    font-size: 0.9rem;
+    padding: 12px;
+  }
 
-    .card-description {
-      font-size: 0.85rem;
-    }
+  .card-description {
+    font-size: 0.85rem;
   }
 
   .action-card button {
     padding: 0.6rem 1.2rem;
     font-size: 0.9rem;
     width: auto;
-    align-self: flex-start;
+    align-self: center;
   }
-}
 
-.page-content {
-  padding: 1.5rem 1rem;
-  margin-top: 2rem;
-}
+  /* Center Event Cards on Mobile */
+  .event-card {
+    text-align: center;
+    align-items: center;
+  }
 
-.section-title {
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-}
+  .event-card-btn {
+    width: auto;
+    margin-top: 1rem;
+  }
 
-.faq-grid {
-  grid-template-columns: 1fr;
-  gap: 1rem;
-}
+  .event-card-info {
+    align-items: center;
+  }
 
-.faq-item {
-  padding: 1rem;
-}
+  .page-content {
+    padding: 1.5rem 1rem;
+    margin-top: 2rem;
+  }
 
-.faq-header {
-  font-size: 0.95rem;
-  padding: 0.75rem 0;
-}
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
 
-.faq-answer {
-  font-size: 0.85rem;
-  padding: 0.75rem 0;
-}
+  .faq-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 
-footer {
-  padding: 1.5rem 1rem;
-}
+  .faq-item {
+    padding: 1rem;
+  }
 
-.footer-content h3 {
-  font-size: 1.1rem;
-  margin-bottom: 0.75rem;
-}
+  .faq-header {
+    font-size: 0.95rem;
+    padding: 0.75rem 0;
+  }
 
-.footer-content p {
-  font-size: 0.85rem;
-}
+  .faq-answer {
+    font-size: 0.85rem;
+    padding: 0.75rem 0;
+  }
 
-.action-buttons-section {
-  gap: 1rem;
-  padding: 1.5rem;
-  flex-direction: column;
-  margin: 1.5rem 0;
-}
+  footer {
+    padding: 1.5rem 1rem;
+  }
 
-.action-button {
-  width: 100%;
-  padding: 0.8rem 1.5rem;
-  font-size: 0.9rem;
-  min-width: unset;
-}
+  .footer-content h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
 
-/* Fix for text spacing on mobile - left align instead of justify */
-.about-red-box p {
-  text-align: left;
-  word-spacing: normal;
-}
+  .footer-content p {
+    font-size: 0.85rem;
+  }
 
-/* Fix for mission background image on mobile */
-/* Fix for mission background image on mobile */
-.vm-card {
-  background-attachment: scroll !important;
-  background-size: cover !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
-  min-height: 350px;
-}
+  .action-buttons-section {
+    gap: 1rem;
+    padding: 1.5rem;
+    flex-direction: column;
+    margin: 1.5rem 0;
+  }
 
-/* Fix for Team Card Names on Mobile */
-.team-card h3 {
-  font-size: 1.1rem !important;
-  line-height: 1.3;
-  white-space: normal;
-  margin-bottom: 0.2rem;
-}
+  .action-button {
+    width: 100%;
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+    min-width: unset;
+  }
 
-.team-card .team-position {
-  font-size: 0.85rem !important;
-  margin-bottom: 0.5rem;
-}
+  /* Fix for text spacing on mobile - left align instead of justify */
+  .about-red-box p {
+    text-align: left;
+    word-spacing: normal;
+  }
 
-.team-card-content {
-  padding: 0.8rem 1rem !important;
-}
+  /* Fix for mission background image on mobile */
+  /* Fix for mission background image on mobile */
+  .vm-card {
+    background-attachment: scroll !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    min-height: 350px;
+  }
+
+  /* Fix for Team Card Names on Mobile */
+  .team-card h3 {
+    font-size: 1.1rem !important;
+    line-height: 1.3;
+    white-space: normal;
+    margin-bottom: 0.2rem;
+  }
+
+  .team-card .team-position {
+    font-size: 0.85rem !important;
+    margin-bottom: 0.5rem;
+  }
+
+  .team-card-content {
+    padding: 0.8rem 1rem !important;
+  }
 }
 
 /* Also apply to slightly larger screens (Tablets/Landscape) where grid is 1 column */
