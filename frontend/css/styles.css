@@ -2240,7 +2240,57 @@ footer {
 }
 
 .contact-label {
-  min-width: 80px;
   /* Fixed width for labels to align content */
   flex-shrink: 0;
+}
+
+/* ===========================
+   MUSIC PLAYER BUTTON
+   =========================== */
+.music-btn {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #ff00cc, #333399);
+  /* Colorful gradient */
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  z-index: 10000;
+  /* High z-index to stay on top */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.music-btn:hover {
+  transform: scale(1.1) rotate(10deg);
+  box-shadow: 0 6px 20px rgba(255, 0, 204, 0.6);
+}
+
+.music-btn.playing {
+  animation: musicPulse 2s infinite;
+  background: linear-gradient(135deg, #00ffcc, #333399);
+  /* Defines a different active state color if desired, or keep consistent */
+}
+
+@keyframes musicPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 255, 204, 0.7);
+  }
+
+  70% {
+    box-shadow: 0 0 0 15px rgba(0, 255, 204, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 255, 204, 0);
+  }
 }
