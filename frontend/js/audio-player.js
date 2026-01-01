@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. State Management (Persist across pages)
     const storedTime = localStorage.getItem('bgMusicTime');
     const storedState = localStorage.getItem('bgMusicPlaying');
-    // Default to true (playing) if no state is saved (first visit), otherwise respect user preference
-    const shouldPlay = storedState === null ? true : storedState === 'true';
+    // Default to true (playing) ALWAYS. We ignore previous 'paused' state to satisfy "auto play whenever browser loads".
+    const shouldPlay = true;
 
     if (storedTime) {
         audio.currentTime = parseFloat(storedTime);
