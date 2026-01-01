@@ -127,10 +127,15 @@
             const validHash = "240be518fabd2724ddb6f04eeb1da5967409c720a98d7e831c08c8fa822809f74";
 
             // Compute hash of input
-            const msgBuffer = new TextEncoder().encode(input);
+            const normalizedInput = input.trim(); // Remove whitespace
+            const msgBuffer = new TextEncoder().encode(normalizedInput);
             const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
             const hashArray = Array.from(new Uint8Array(hashBuffer));
             const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+            console.log("Input:", normalizedInput);
+            console.log("Calculated Hash:", hashHex);
+            console.log("Expected Hash:", validHash);
 
             if (hashHex === validHash) {
                 // Success
