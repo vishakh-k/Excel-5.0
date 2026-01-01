@@ -1634,6 +1634,9 @@ footer {
   .form-group select {
     font-size: 0.9rem;
     padding: 12px;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    max-width: 100%;
   }
 
   .card-description {
