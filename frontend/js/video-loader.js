@@ -28,7 +28,7 @@ window.addEventListener("load", function () {
       // Remove from DOM after fade completes
       setTimeout(() => {
         videoLoader.style.display = "none";
-      }, 1000);
+      }, 500);
     }
   }
 });
