@@ -2215,16 +2215,15 @@ footer {
   object-fit: contain;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   /* Bouncy transition */
-  filter: brightness(1.2) drop-shadow(0 0 3px rgba(255, 255, 255, 0.6));
-  /* Added brightness and stronger white glow */
+  filter: brightness(2) drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+  /* Very bright and glowing white */
 }
 
 .social-icon:hover {
   transform: scale(1.2) translateX(5px);
   /* Move slightly right on hover */
-  filter: brightness(1.5) drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
-  /* Even brighter on hover with strong white glow */
-  /* Replaced red glow with strong white glow/texture effect */
+  filter: brightness(3) drop-shadow(0 0 20px rgba(255, 255, 255, 1));
+  /* Blindingly white glow on hover */
 }
 
 .footer-section p {
