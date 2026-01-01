@@ -1048,7 +1048,8 @@ footer {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: 1.2fr 0.8fr 0.8fr 1.5fr;
+  /* Specific columns: Contact(wider), Links, Social, Location(widest) */
   gap: 2rem;
   margin-bottom: 2rem;
 }
@@ -1767,6 +1768,23 @@ footer {
     background-size: cover !important;
     background-position: center !important;
   }
+
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+    /* 2 columns on tablet */
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    /* 1 column on mobile */
+  }
+
+  .social-icons-row {
+    flex-direction: row;
+    /* Horizontal again on mobile to save vertical space if needed, or keep vertical? User asked for vertical generally. Let's keep vertical or allow row if space constraints. Actually user asked for vertical vertical. Let's keep it generally vertical but maybe row for mobile looks better? User specifically asked "add that links vertically". I will respect that universally unless it breaks badly. */
+  }
 }
 
 /* Standard Font only for Value/Action details */
@@ -2181,9 +2199,12 @@ footer {
 }
 
 /* Social Media Icons in Footer*/
+/* Social Media Icons in Footer*/
 .social-icons-row {
   display: flex;
-  gap: 20px;
+  flex-direction: column;
+  /* Vertical alignment */
+  gap: 15px;
   margin-top: 15px;
   justify-content: flex-start;
 }
@@ -2198,7 +2219,27 @@ footer {
 }
 
 .social-icon:hover {
-  transform: scale(1.2) translateY(-3px);
+  transform: scale(1.2) translateX(5px);
+  /* Move slightly right on hover */
   filter: drop-shadow(0 0 8px rgba(220, 20, 60, 0.8)) brightness(1.2);
   /* Red glow matching theme */
+}
+
+.footer-section p {
+  text-align: left;
+  /* Ensure text is left aligned mostly */
+}
+
+/* Specific alignment for Address/Contact info if needed */
+.footer-section:first-child p {
+  display: flex;
+  align-items: flex-start;
+  /* Align icon/label with text top */
+  margin-bottom: 0.8rem;
+}
+
+.contact-label {
+  min-width: 80px;
+  /* Fixed width for labels to align content */
+  flex-shrink: 0;
 }
