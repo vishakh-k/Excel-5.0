@@ -16,8 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.appendChild(musicBtn);
 
     // 3. State Management (Persist across pages)
+    // 3. State Management (Persist across pages)
     const storedTime = localStorage.getItem('bgMusicTime');
-    const isPlaying = localStorage.getItem('bgMusicPlaying') === 'true';
+    const storedState = localStorage.getItem('bgMusicPlaying');
+    // Default to true (playing) if no state is saved (first visit), otherwise respect user preference
+    const shouldPlay = storedState === null ? true : storedState === 'true';
 
     if (storedTime) {
         audio.currentTime = parseFloat(storedTime);
@@ -61,7 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. Auto-play handling
     // We try to play if it was playing before, or if it's the first visit (optional, browsers block this usually)
     // If browser blocks, we just stay paused until user clicks.
-    if (isPlaying || isPlaying === null) { // Default to try playing
+    // 5. Auto-play handling
+    // We try to play if it was playing before, or if it's the first visit (optional, browsers block this usually)
+    // If browser blocks, we just stay paused until user clicks.
+    if (shouldPlay) { // Default to try playing
         const playPromise = audio.play();
         if (playPromise !== undefined) {
             playPromise.then(() => {
