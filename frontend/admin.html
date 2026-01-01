@@ -70,25 +70,39 @@
 </head>
 
 <body>
-    <h1>Excel 5.0 Admin Dashboard</h1>
-
-    <div class="controls">
-        <p id="status" style="margin-top: 1rem; color: #ccc;">Loading data...</p>
+    <!-- Login Overlay -->
+    <div id="login-overlay"
+        style="position: fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:9999; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+        <h2 style="color: #dc143c; margin-bottom: 2rem; font-family: 'ITC Benguiat', serif;">SECURITY CHECK</h2>
+        <input type="password" id="admin-pass" placeholder="Enter Secret Code"
+            style="padding: 1rem; width: 300px; border: 2px solid #dc143c; background: #111; color: white; font-family: 'Courier New', monospace; font-size: 1.2rem; margin-bottom: 1rem; text-align: center;">
+        <button onclick="checkAdmin()" style="width: 300px;">ACCESS DASHBOARD</button>
+        <p id="login-msg" style="color: red; margin-top: 1rem;"></p>
     </div>
 
-    <table id="regTable">
-        <thead>
-            <tr>
-                <th>College</th>
-                <th>Leader</th>
-                <th>Event Participants (Name - Contact)</th>
-                <th>Total Participants</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Data will load here -->
-        </tbody>
-    </table>
+    <!-- Admin Content (Hidden by default) -->
+    <div id="admin-content" style="display: none;">
+        <h1>Excel 5.0 Admin Dashboard</h1>
+
+        <div class="controls">
+            <button onclick="exportToExcel()">Export to Excel</button>
+            <p id="status" style="margin-top: 1rem; color: #ccc;">Loading data...</p>
+        </div>
+
+        <table id="regTable">
+            <thead>
+                <tr>
+                    <th>College</th>
+                    <th>Leader</th>
+                    <th>Event Participants (Name - Contact)</th>
+                    <th>Total Participants</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will load here -->
+            </tbody>
+        </table>
+    </div>
 
     <script>
         let allRegistrations = [];
@@ -105,6 +119,49 @@
             'rofiReel'       // Videography
         ];
 
+        async function checkAdmin() {
+            const input = document.getElementById('admin-pass').value;
+            const msg = document.getElementById('login-msg');
+
+            // SHA-256 Hash of 'admin123'
+            const validHash = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918";
+
+            // Compute hash of input
+            const msgBuffer = new TextEncoder().encode(input);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+
+            if (hashHex === validHash) {
+                // Success
+                sessionStorage.setItem('excel_admin_auth', 'true');
+                document.getElementById('login-overlay').style.display = 'none';
+                document.getElementById('admin-content').style.display = 'block';
+                loadData(); // Only load data after auth
+            } else {
+                msg.innerText = "ACCESS DENIED";
+                document.getElementById('admin-pass').value = '';
+            }
+        }
+
+        // Check session on load
+        window.addEventListener('load', () => {
+            if (sessionStorage.getItem('excel_admin_auth') === 'true') {
+                document.getElementById('login-overlay').style.display = 'none';
+                document.getElementById('admin-content').style.display = 'block';
+                loadData();
+            } else {
+                // Ensure data isn't loaded if not authed (moved loadData call out of automatic execution)
+            }
+        });
+
+        // Enter key support
+        document.getElementById('admin-pass').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                checkAdmin();
+            }
+        });
+
         const eventLabels = {
             strangeSyntax: "Strange Syntax (Coding)",
             designDock: "Design Dock (Web Design)",
@@ -115,6 +172,7 @@
             strangeRhythms: "Strange Rhythms (Dance)",
             rofiReel: "Rofi Reel (Videography)"
         };
+
 
         async function loadData() {
             const tableBody = document.querySelector('#regTable tbody');
@@ -266,8 +324,7 @@
             XLSX.writeFile(wb, "Excel_5.0_Registrations_Full.xlsx");
         }
 
-        // Load on start
-        loadData();
+        // Load on start - Removed, controlled by Auth above.
     </script>
     <script src="js/audio-player.js"></script>
 </body>
