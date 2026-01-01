@@ -75,6 +75,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }).catch(error => {
                 console.log("Autoplay prevented available to user interaction only.");
                 updateIcon(false);
+                // Fallback: waiting for any user interaction to start playing
+                const onUserInteract = () => {
+                    const playPromise = audio.play();
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            updateIcon(true);
+                            localStorage.setItem('bgMusicPlaying', 'true');
+                            // Remove listener once successful
+                            document.removeEventListener('click', onUserInteract);
+                            document.removeEventListener('touchstart', onUserInteract);
+                        }).catch(e => console.log("Still prevented", e));
+                    }
+                };
+                document.addEventListener('click', onUserInteract);
+                document.addEventListener('touchstart', onUserInteract);
             });
         }
     } else {
