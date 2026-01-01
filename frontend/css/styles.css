@@ -2296,3 +2296,14 @@ footer {
     box-shadow: 0 0 0 0 rgba(220, 20, 60, 0);
   }
 }
+
+/* Mobile Tweaks for Music Button */
+@media (max-width: 480px) {
+  .music-btn {
+    bottom: 20px;
+    left: 20px;
+    width: 45px;
+    height: 45px;
+    font-size: 1.2rem;
+  }
+}
