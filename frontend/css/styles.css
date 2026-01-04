@@ -1,4 +1,4 @@
-/* =====================================================
+﻿/* =====================================================
    EXCEL 5.0 - STRANGER THINGS THEME
    Black & Red Color Scheme
    ===================================================== */
@@ -634,7 +634,7 @@ nav {
 }
 
 .vm-list li::before {
-  content: "►";
+  content: "â–º";
   position: absolute;
   left: 0;
   color: var(--primary-red);
@@ -2307,3 +2307,53 @@ footer {
     font-size: 1.2rem;
   }
 }
+
+/* Developer Link with Underline Animation */
+.dev-link {
+    text-decoration: none;
+    color: #d9d9d9; /* Darker White */
+    font-weight: bold;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    padding-bottom: 3px;
+}
+
+.dev-link::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px; /* Thinner white line */
+    bottom: 0;
+    left: 0;
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.dev-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px; /* Thicker red line */
+    bottom: 0;
+    left: 0;
+    background-color: var(--primary-red);
+    transition: width 0.3s ease-in-out;
+    z-index: 2;
+}
+
+.dev-link:hover::after {
+    width: 100%;
+}
+
+.dev-link:hover {
+    color: var(--primary-red);
+    text-shadow: 0 0 10px rgba(220, 20, 60, 0.5);
+}
+
+.dev-link i {
+    margin-left: 5px;
+    font-size: 0.9em;
+}
+
