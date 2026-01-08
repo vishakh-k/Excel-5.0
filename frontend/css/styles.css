@@ -634,12 +634,14 @@ nav {
 }
 
 .vm-list li::before {
-  content: "â–º";
+  content: "\f054";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
   position: absolute;
   left: 0;
   color: var(--primary-red);
-  font-size: 0.8rem;
-  top: 3px;
+  font-size: 0.9rem;
+  top: 4px;
 }
 
 @media (max-width: 992px) {
@@ -2310,51 +2312,54 @@ footer {
 
 /* Developer Link with Underline Animation */
 .dev-link {
-    text-decoration: none;
-    color: #d9d9d9; /* Darker White */
-    font-weight: bold;
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-    transition: color 0.3s ease;
-    padding-bottom: 3px;
+  text-decoration: none;
+  color: #d9d9d9;
+  /* Darker White */
+  font-weight: bold;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  padding-bottom: 3px;
 }
 
 .dev-link::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 1px; /* Thinner white line */
-    bottom: 0;
-    left: 0;
-    background-color: #ffffff;
-    transition: all 0.3s ease;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  /* Thinner white line */
+  bottom: 0;
+  left: 0;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
 }
 
 .dev-link::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px; /* Thicker red line */
-    bottom: 0;
-    left: 0;
-    background-color: var(--primary-red);
-    transition: width 0.3s ease-in-out;
-    z-index: 2;
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  /* Thicker red line */
+  bottom: 0;
+  left: 0;
+  background-color: var(--primary-red);
+  transition: width 0.3s ease-in-out;
+  z-index: 2;
 }
 
 .dev-link:hover::after {
-    width: 100%;
+  width: 100%;
 }
 
 .dev-link:hover {
-    color: var(--primary-red);
-    text-shadow: 0 0 10px rgba(220, 20, 60, 0.5);
+  color: var(--primary-red);
+  text-shadow: 0 0 10px rgba(220, 20, 60, 0.5);
 }
 
 .dev-link i {
-    margin-left: 5px;
-    font-size: 0.9em;
+  margin-left: 5px;
+  font-size: 0.9em;
 }
 
 
@@ -2362,60 +2367,69 @@ footer {
    NEW SOCIAL ICONS STYLES
    =========================== */
 .social-icons-row {
-    display: flex;
-    justify-content: flex-start; /* Align left in footer context, or center if needed */
-    flex-wrap: wrap;
-    gap: 10px;
+  display: flex;
+  justify-content: flex-start;
+  /* Align left in footer context, or center if needed */
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .social-icon-link {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 45px;
-    height: 45px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    margin-right: 10px;
-    text-decoration: none;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border: 1px solid rgba(220, 20, 60, 0.3);
-    position: relative;
-    overflow: hidden;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  margin-right: 10px;
+  text-decoration: none;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid rgba(220, 20, 60, 0.3);
+  position: relative;
+  overflow: hidden;
 }
 
 .social-icon-link i {
-    font-size: 1.2rem;
-    color: #ffffff;
-    transition: all 0.4s ease;
-    z-index: 2;
+  font-size: 1.2rem;
+  color: #ffffff;
+  transition: all 0.4s ease;
+  z-index: 2;
 }
 
 /* Hover Effects */
 .social-icon-link:hover {
-    background: #DC143C;
-    border-color: #DC143C;
-    transform: translateY(-5px) scale(1.1);
-    box-shadow: 0 0 20px rgba(220, 20, 60, 0.6), 0 0 40px rgba(220, 20, 60, 0.3);
+  background: #DC143C;
+  border-color: #DC143C;
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 0 20px rgba(220, 20, 60, 0.6), 0 0 40px rgba(220, 20, 60, 0.3);
 }
 
 .social-icon-link:hover i {
-    color: #000000;
-    transform: scale(1.2);
+  color: #000000;
+  transform: scale(1.2);
 }
 
 /* Specific Brand Colors on Hover (Optional, keeping it red for theme consistency but can trigger brand colors) */
 /* 
 .social-icon-link:hover .fa-instagram { color: #fff; } 
-*/ 
+*/
 
 /* Pulse Animation for icons */
 @keyframes iconPulse {
-    0% { box-shadow: 0 0 0 0 rgba(220, 20, 60, 0.4); }
-    70% { box-shadow: 0 0 0 10px rgba(220, 20, 60, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(220, 20, 60, 0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(220, 20, 60, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(220, 20, 60, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(220, 20, 60, 0);
+  }
 }
 
 .social-icon-link:hover {
-    animation: iconPulse 1.5s infinite;
+  animation: iconPulse 1.5s infinite;
 }
