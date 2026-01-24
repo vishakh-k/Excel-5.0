@@ -1485,6 +1485,49 @@ footer {
     font-size: 0.95rem;
     min-width: unset;
   }
+
+  /* Team Card Visibility Fixes for Mobile/Tablet */
+  .team-card-content {
+    /* Show only the top portion (Name + Position) by default (~100px peek) */
+    transform: translateY(calc(100% - 100px)) !important;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 50%, rgba(0, 0, 0, 0.7) 100%) !important;
+    justify-content: flex-end;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  /* Reveal Full Content on Hover/Tap */
+  .team-card:hover .team-card-content,
+  .team-card:active .team-card-content,
+  .team-card:focus-within .team-card-content {
+    transform: translateY(0) !important;
+  }
+
+  .team-card h3 {
+    white-space: normal !important;
+    word-wrap: break-word;
+    /* Ensure long names wrap */
+    padding-right: 0;
+    font-size: 1.2rem !important;
+  }
+
+  .team-position {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Hide Bio/Links initially */
+  .team-bio,
+  .social-links {
+    opacity: 0 !important;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Show Bio/Links on Hover/Tap */
+  .team-card:hover .team-bio,
+  .team-card:hover .social-links,
+  .team-card:active .team-bio,
+  .team-card:active .social-links {
+    opacity: 1 !important;
+  }
 }
 
 @media (max-width: 480px) {
