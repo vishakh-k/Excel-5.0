@@ -330,12 +330,36 @@
         </div>
     </div>
 
-    <div class="page-content" style="margin-top: 5rem;">
+    <div class="page-content">
+
+        <!-- COUNTDOWN TIMER -->
+        <div class="countdown-section">
+            <h2 class="fast-register-text">REGISTER FAST</h2>
+            <div id="countdown" class="countdown-timer">
+                <div class="timer-block">
+                    <span class="timer-value" id="days">00</span>
+                    <span class="timer-label">Days</span>
+                </div>
+                <div class="timer-block">
+                    <span class="timer-value" id="hours">00</span>
+                    <span class="timer-label">Hours</span>
+                </div>
+                <div class="timer-block">
+                    <span class="timer-value" id="minutes">00</span>
+                    <span class="timer-label">Minutes</span>
+                </div>
+                <div class="timer-block">
+                    <span class="timer-value" id="seconds">00</span>
+                    <span class="timer-label">Second</span>
+                </div>
+            </div>
+        </div>
         <h1 class="section-title"
             style="font-family: 'Courier New', Courier, monospace; font-size: 3.5rem; color: #ffffff; text-shadow: 0 0 10px rgba(220, 20, 60, 0.8); letter-spacing: 4px; font-style: italic; font-weight: bold; text-transform: uppercase;">
             Team Registration</h1>
 
-        <p style="text-align: center; color: #CCCCCC; font-size: 1.1rem; margin-bottom: 2rem;">
+        <p
+            style="text-align: center; color: #DC143C; font-size: 1.5rem; margin-bottom: 2rem; font-family: 'ITC Benguiat', serif; text-shadow: 0 0 10px rgba(220, 20, 60, 0.6); text-transform: uppercase; letter-spacing: 1px; font-weight: bold;">
             EXCEL 5.0 - The Ultimate Tech Fest Experience
         </p>
 
@@ -347,13 +371,9 @@
                 <h3 style="color: #DC143C; margin-top: 0; font-family: 'ITC Benguiat', serif;">IMPORTANT NOTES:</h3>
                 <ul
                     style="color: #ddd; font-family: 'Courier New', monospace; font-size: 0.9rem; line-height: 1.6; margin-bottom: 0; padding-left: 20px;">
-                    <li>If you are not registering for a specific event/participant slot, please enter
-                        <strong>-</strong> or leave it blank.
-                    </li>
-                    <li>Please ensure all Phone Numbers provided are valid and active (WhatsApp preferred).</li>
-                    <li><strong>The Team Leader must be one of the registered participants.</strong> They are included
-                        in the total count (Max 19-21).</li>
-                    <li>The Team Leader is responsible for coordinating the entire team.</li>
+                    <li>For unused slots, enter <strong>-</strong> or leave blank.</li>
+                    <li>Use valid WhatsApp numbers.</li>
+                    <li><strong>Team Leader must be a participant.</strong> (Included in 19-21 count).</li>
                 </ul>
             </div>
 
@@ -857,6 +877,40 @@
     </script>
 
     <script src="js/audio-player.js"></script>
+    <script>
+        function startCountdown() {
+            // Set the date we're counting down to
+            const targetDate = new Date("Feb 18, 2026 00:00:00").getTime();
+
+            const timerInterval = setInterval(function () {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+
+                if (distance < 0) {
+                    clearInterval(timerInterval);
+                    document.getElementById("countdown").innerHTML = "<div class='timer-value'>REGISTRATION CLOSED</div>";
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                const daysEl = document.getElementById("days");
+                const hoursEl = document.getElementById("hours");
+                const minutesEl = document.getElementById("minutes");
+                const secondsEl = document.getElementById("seconds");
+
+                if (daysEl) daysEl.innerText = days < 10 ? "0" + days : days;
+                if (hoursEl) hoursEl.innerText = hours < 10 ? "0" + hours : hours;
+                if (minutesEl) minutesEl.innerText = minutes < 10 ? "0" + minutes : minutes;
+                if (secondsEl) secondsEl.innerText = seconds < 10 ? "0" + seconds : seconds;
+            }, 1000);
+        }
+
+        document.addEventListener('DOMContentLoaded', startCountdown);
+    </script>
 </body>
 
 </html>
