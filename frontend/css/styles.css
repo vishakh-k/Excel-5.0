@@ -10,6 +10,73 @@
   --dark-black: #1a1a1a;
   --light-gray: #cccccc;
   --white: #ffffff;
+  --archive-gold: #ffd700;
+}
+
+.archive-banner {
+  position: fixed;
+  top: 7.8rem;
+  left: 2rem;
+  right: 2rem;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(220, 20, 60, 0.4);
+  color: #fff;
+  padding: 10px 0;
+  z-index: 9999;
+  overflow: hidden;
+  white-space: nowrap;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.8), 0 0 15px rgba(220, 20, 60, 0.2);
+  font-family: 'Courier New', monospace;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+.marquee-wrapper {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 30s linear infinite;
+}
+
+.marquee-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 4rem;
+  padding-right: 4rem;
+}
+
+.marquee-item {
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.marquee-item span {
+  color: var(--primary-red);
+  text-shadow: 0 0 10px var(--primary-red);
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Ensure page content has extra space for fixed navbar and banner */
+.hero,
+.page-content {
+  padding-top: 13rem !important;
 }
 
 * {

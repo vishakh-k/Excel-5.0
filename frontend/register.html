@@ -298,6 +298,20 @@
 </head>
 
 <body>
+    <div class="archive-banner">
+        <div class="marquee-wrapper">
+            <div class="marquee-content">
+                <div class="marquee-item"><span>★</span> Excel 5.0 Showcase Mode</div>
+                <div class="marquee-item"><span>★</span> Fest Successfully Completed</div>
+                <div class="marquee-item"><span>★</span> For Educational Purposes Only</div>
+                <div class="marquee-item"><span>★</span> Department of MCA, SIT Mangaluru</div>
+                <div class="marquee-item"><span>★</span> Excel 5.0 Showcase Mode</div>
+                <div class="marquee-item"><span>★</span> Fest Successfully Completed</div>
+                <div class="marquee-item"><span>★</span> For Educational Purposes Only</div>
+                <div class="marquee-item"><span>★</span> Department of MCA, SIT Mangaluru</div>
+            </div>
+        </div>
+    </div>
 
     <!-- NAVIGATION BAR -->
     <nav>
@@ -310,8 +324,7 @@
             <li><a href="about.html">About</a></li>
             <li><a href="events.html">Events</a></li>
             <li><a href="team.html">Team</a></li>
-            <li><a href="brochure/Exce 5.0.pdf" download class="nav-btn">Brochure</a></li>
-            <li><a href="register.html" class="nav-btn">Register</a></li>
+            <li><a href="register.html" class="nav-btn" style="background: #555;">Archived</a></li>
         </ul>
 
         <div class="hamburger">
@@ -322,68 +335,31 @@
     </nav>
 
     <!-- PAGE CONTENT -->
-    <!-- Custom Success Modal -->
-    <div id="successModal" class="success-modal">
-        <div class="success-content">
-            <h2 class="success-text">SUCCESSFULLY REGISTERED FOR<br>EXCEL 5.0</h2>
-            <button class="success-close-btn" onclick="closeModalAndRedirect()">Continue</button>
-        </div>
-    </div>
 
     <div class="page-content">
-
-        <!-- COUNTDOWN TIMER -->
-        <div class="countdown-section">
-            <h2 class="fast-register-text">EVENT STARTS IN</h2>
-            <div id="countdown" class="countdown-timer">
-                <div class="timer-block">
-                    <span class="timer-value" id="days">00</span>
-                    <span class="timer-label">Days</span>
-                </div>
-                <div class="timer-block">
-                    <span class="timer-value" id="hours">00</span>
-                    <span class="timer-label">Hours</span>
-                </div>
-                <div class="timer-block">
-                    <span class="timer-value" id="minutes">00</span>
-                    <span class="timer-label">Minutes</span>
-                </div>
-                <div class="timer-block">
-                    <span class="timer-value" id="seconds">00</span>
-                    <span class="timer-label">Second</span>
-                </div>
-            </div>
-        </div>
-        <h1 class="section-title"
-            style="font-family: 'Courier New', Courier, monospace; font-size: 3.5rem; color: #ffffff; text-shadow: 0 0 10px rgba(220, 20, 60, 0.8); letter-spacing: 4px; font-style: italic; font-weight: bold; text-transform: uppercase;">
-            Team Registration</h1>
-
-        <p
-            style="text-align: center; color: #DC143C; font-size: 1.5rem; margin-bottom: 2rem; font-family: 'ITC Benguiat', serif; text-shadow: 0 0 10px rgba(220, 20, 60, 0.6); text-transform: uppercase; letter-spacing: 1px; font-weight: bold;">
-            EXCEL 5.0 - The Ultimate Tech Fest Experience
-        </p>
-
-        <!-- REGISTRATION FORM -->
-        <div class="form-container" style="text-align: center; padding: 4rem 2rem;">
-            <i class="fa-solid fa-lock" style="font-size: 4rem; color: #DC143C; margin-bottom: 2rem;"></i>
+        <div class="form-container" style="text-align: center; padding: 4rem 2rem; margin-top: 2rem;">
+            <i class="fa-solid fa-trophy"
+                style="font-size: 5rem; color: #DC143C; margin-bottom: 2rem; animation: pulseGlow 2s infinite;"></i>
             <h2
                 style="color: #fff; font-family: 'ITC Benguiat', serif; font-size: 2.5rem; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 2px;">
-                Registration Closed
+                Fest Successfully Completed
             </h2>
             <p
                 style="color: #ccc; font-family: 'Courier New', monospace; font-size: 1.2rem; line-height: 1.6; margin-bottom: 2rem;">
-                Online registration for Excel 5.0 is now closed.<br>
-                Thank you for the overwhelming response!
+                Excel 5.0 (2026) was a resounding success! <br>
+                Thank you to all participants, coordinators, and sponsors who made this happen.
             </p>
-            <div style="margin-top: 2rem; border-top: 1px solid #333; padding-top: 2rem;">
-                <p style="color: #DC143C; font-size: 1rem; margin-bottom: 0.5rem;">For queries, contact:</p>
-                <p style="color: #fff;">94800 46998 | 63609 13762</p>
+            <div
+                style="margin-top: 2rem; border-top: 1px solid #333; padding-top: 2rem; color: #888; font-size: 0.9rem;">
+                <p>This page is now part of the Excel 5.0 Archive.<br>
+                    For educational purpose and portfolio showcase only.</p>
             </div>
             <a href="index.html" class="form-btn"
                 style="display: inline-block; width: auto; margin-top: 2rem; text-decoration: none; padding: 12px 30px;">
                 Back to Home
             </a>
         </div>
+    </div>
 
     </div>
 
@@ -452,136 +428,7 @@
 
     <!-- SCRIPTS -->
     <script src="js/main.js"></script>
-    <script>
-        async function handleRegistration(e) {
-            e.preventDefault();
-
-            const submitBtn = document.querySelector('.form-btn');
-            const originalText = submitBtn.innerText;
-            submitBtn.innerText = "Submitting...";
-            submitBtn.disabled = true;
-
-            // Gather Data
-            const form = document.getElementById('excelRegistrationForm');
-            const formData = new FormData(form);
-
-            // Helper to get value
-            const get = (name) => formData.get(name);
-
-            // Construct JSON Object
-            const registrationData = {
-                collegeName: get('collegeName'),
-                totalParticipants: get('totalParticipants'),
-                teamLeaderName: get('teamLeaderName'),
-                teamLeaderContact: get('teamLeaderContact'),
-                emailId: get('emailId'),
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                events: {
-                    strangeSyntax: [
-                        { name: get('ss_p1_name'), contact: get('ss_p1_contact') },
-                        { name: get('ss_p2_name'), contact: get('ss_p2_contact') }
-                    ],
-                    designDock: [
-                        { name: get('dd_p1_name'), contact: get('dd_p1_contact') },
-                        { name: get('dd_p2_name'), contact: get('dd_p2_contact') }
-                    ],
-                    strangerBytes: [
-                        { name: get('sb_p1_name'), contact: get('sb_p1_contact') },
-                        { name: get('sb_p2_name'), contact: get('sb_p2_contact') }
-                    ],
-                    hawkinsLab: [
-                        { name: get('hl_p1_name'), contact: get('hl_p1_contact') }
-                    ],
-                    hawkinsHeist: [
-                        { name: get('th_p1_name'), contact: get('th_p1_contact') },
-                        { name: get('th_p2_name'), contact: get('th_p2_contact') }
-                    ],
-                    upsideDown: [
-                        { name: get('ud_p1_name'), contact: get('ud_p1_contact') },
-                        { name: get('ud_p2_name'), contact: get('ud_p2_contact') },
-                        { name: get('ud_p3_name'), contact: get('ud_p3_contact') },
-                        { name: get('ud_p4_name'), contact: get('ud_p4_contact') }
-                    ],
-                    strangeRhythms: [ // Dynamic 7 participants
-                        { name: get('sr_p1_name'), contact: get('sr_p1_contact') },
-                        { name: get('sr_p2_name'), contact: get('sr_p2_contact') },
-                        { name: get('sr_p3_name'), contact: get('sr_p3_contact') },
-                        { name: get('sr_p4_name'), contact: get('sr_p4_contact') },
-                        { name: get('sr_p5_name'), contact: get('sr_p5_contact') },
-                        { name: get('sr_p6_name'), contact: get('sr_p6_contact') }, // Optional
-                        { name: get('sr_p7_name'), contact: get('sr_p7_contact') }  // Optional
-                    ],
-                    rofiReel: [
-                        { name: get('rr_p1_name'), contact: get('rr_p1_contact') }
-                    ]
-                }
-            };
-
-            // Remove empty optional participants (Clean up)
-            // Example: Filter out empty names from arrays
-            for (const key in registrationData.events) {
-                registrationData.events[key] = registrationData.events[key].filter(p => p.name && p.name.trim() !== "");
-            }
-
-            try {
-                // Send to Firebase
-                await db.collection("registrations").add(registrationData);
-
-
-
-                // Show Custom Modal
-                document.getElementById('successModal').style.display = 'flex';
-                form.reset();
-                // Redirect happens when user clicks the "Continue" button
-            } catch (error) {
-                console.error("Error adding document: ", error);
-                alert("❌ Error submitting form: " + error.message);
-            } finally {
-                submitBtn.innerText = originalText;
-                submitBtn.disabled = false;
-            }
-        }
-
-        function closeModalAndRedirect() {
-            window.location.href = "index.html";
-        }
-    </script>
-
     <script src="js/audio-player.js"></script>
-    <script>
-        function startCountdown() {
-            // Set the date we're counting down to
-            const targetDate = new Date("Feb 18, 2026 00:00:00").getTime();
-
-            const timerInterval = setInterval(function () {
-                const now = new Date().getTime();
-                const distance = targetDate - now;
-
-                if (distance < 0) {
-                    clearInterval(timerInterval);
-                    document.getElementById("countdown").innerHTML = "<div class='timer-value'>REGISTRATION CLOSED</div>";
-                    return;
-                }
-
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                const daysEl = document.getElementById("days");
-                const hoursEl = document.getElementById("hours");
-                const minutesEl = document.getElementById("minutes");
-                const secondsEl = document.getElementById("seconds");
-
-                if (daysEl) daysEl.innerText = days < 10 ? "0" + days : days;
-                if (hoursEl) hoursEl.innerText = hours < 10 ? "0" + hours : hours;
-                if (minutesEl) minutesEl.innerText = minutes < 10 ? "0" + minutes : minutes;
-                if (secondsEl) secondsEl.innerText = seconds < 10 ? "0" + seconds : seconds;
-            }, 1000);
-        }
-
-        document.addEventListener('DOMContentLoaded', startCountdown);
-    </script>
 </body>
 
 </html>
